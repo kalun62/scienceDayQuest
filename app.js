@@ -165,10 +165,11 @@ function activeHint() {
 
 function descrHintImg () {
 	const descr = document.getElementById('descr')
-	switch(p){
-		case 2: return descr.textContent = 'Попробуй с другой стороны'
-		case 1: return descr.textContent = 'Может все-таки посмотреть слева?'
+	if(descr){
+		switch(p){
+			case 2: return descr.textContent = 'Попробуй с другой стороны'
+			case 1: return descr.textContent = 'Может все-таки посмотреть слева?'	
+		}
 	}
 }
-
 firstScreen()
