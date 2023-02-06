@@ -137,7 +137,7 @@ function activeHint() {
 	setTimeout(() => {
 		hint.classList.add('active')
 		hintLength.classList.add('active')
-	},30000)
+	},15000)
 
 	hint.addEventListener('click', () => {
 		descrHintImg()
@@ -157,7 +157,7 @@ function activeHint() {
 			descr.classList.remove('active')
 			hint.classList.add('active')
 			hintLength.classList.add('active')
-		},10000)
+		},5000)
 	})
 }
 
