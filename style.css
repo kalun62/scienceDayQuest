@@ -17,9 +17,13 @@ body {
 	height: 100vh;
 	text-align: center;
 	background-image: url('image/background.jpg');
-	/* background-repeat: no-repeat; */
 	background-size: cover;
 	background-color: #818080;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .app__wrapper {
@@ -27,7 +31,6 @@ body {
 	flex-direction: column;
     align-items: center;
 	width: 100%;
-	/* height: 95%; */
 }
 .fl{
 	width: 100%;
@@ -36,7 +39,9 @@ body {
 .step {
 	display: block;
 	padding-top: 10px;
-	color: #818080;
+	color: white;
+	position: absolute;
+	top: 20px;
 }
 
 .error {
@@ -63,7 +68,6 @@ input {
 	outline: auto;
 	background: #ccccccc2;
 	color: white;
-	/* text-shadow: 1px 1px 1px #000; */
 	font-size: 20px;
 }
 
