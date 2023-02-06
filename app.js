@@ -6,7 +6,6 @@ const app = document.querySelector('.app'),
 	button = document.createElement('button'),
 	errorLabel = document.createElement('label')
 
-
 let i = 1
 let p = 3
 let quests
@@ -68,7 +67,6 @@ function questTextOrImage() {
 				</div>
 			</div>
 			`
-		
 		step.innerText = `Вопрос ${i} из ${quests.length}`
 		button.innerText = 'Далее'
 		app.append(button)
@@ -139,7 +137,7 @@ function activeHint() {
 	setTimeout(() => {
 		hint.classList.add('active')
 		hintLength.classList.add('active')
-	},100)
+	},30000)
 
 	hint.addEventListener('click', () => {
 		descrHintImg()
@@ -159,7 +157,7 @@ function activeHint() {
 			descr.classList.remove('active')
 			hint.classList.add('active')
 			hintLength.classList.add('active')
-		},2000)
+		},10000)
 	})
 }
 
