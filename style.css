@@ -33,7 +33,7 @@ body {
     background-size: cover;
     transition: all 0.1s ease;  
 	background-color: #818080;
-	animation: scale 400s linear infinite;
+	animation: scale 600s linear infinite;
 }
 
 @keyframes scale {
