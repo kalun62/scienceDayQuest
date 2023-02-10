@@ -9,7 +9,7 @@ const app = document.querySelector('.app'),
 
 let i = 1
 let p = 3
-let quests
+let quests, errorText
 
 wrap.classList.add('app__wrapper')
 background.classList.add('background')
@@ -98,7 +98,8 @@ function errorLabels(input) {
 	if (input.classList.contains('error')) {
 		errorLabel.setAttribute('for', 'ansver')
 		errorLabel.classList.add('label')
-		errorLabel.innerHTML = `Неверно, Проверь опечатки и попробуй еще`
+		input.value === '' ? errorText = 'Введите ответ выше' : errorText = 'Проверьте ответ или опечатки'
+		errorLabel.innerHTML = errorText
 		input.after(errorLabel)
 	} else {
 		errorLabel.remove()
@@ -122,6 +123,7 @@ function final() {
 	app.innerHTML = `<div class="background"></div><div class="final">Все верно !!!<br><br> Получите Ваше слово !!!</div>`
 	button.removeEventListener('click', validate)
 	audio()
+	paralax()
 }
 
 function audio() {
@@ -152,8 +154,10 @@ function activeHint() {
 	hint.addEventListener('click', () => {
 		descrHintImg()
 		descr.classList.add('active')
-		hint.classList.remove('active')
-		hintLength.classList.remove('active')
+		setTimeout(() => {
+			hint.classList.remove('active')
+			hintLength.classList.remove('active')
+		},200)
 		
 		if(p > 1){
 			p--

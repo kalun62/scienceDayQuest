@@ -25,7 +25,6 @@ body {
 }
 .background{
 	position: absolute;
-	
 	width: 110%;
 	height: 110%;
 	background-image: url('image/background.jpg');
@@ -34,6 +33,16 @@ body {
     background-size: cover;
     transition: all 0.1s ease;  
 	background-color: #818080;
+	animation: scale 400s linear infinite;
+}
+
+@keyframes scale {
+	50% {
+		transform: scale(2)
+	}
+	100% {
+		transform: scale(1);
+	}
 }
 
 .app__wrapper {
@@ -98,6 +107,7 @@ input {
     font-weight: 600;
     font-size: 28px;
 	text-shadow: 1px 3px 2px #000;
+	overflow: hidden;
 }
 
 .quest.img {
@@ -111,7 +121,7 @@ input {
 	width: 70%;
 }
 .hint{
-	display: none;
+	transform: scale(0);
 	width: 30px;
 	position: absolute;
 	top: 10px;
@@ -119,11 +129,44 @@ input {
 	cursor: pointer;
 	transition: .3s;
 }
-.hint:hover{
-	transform: scale(1.1);
+
+.hint:hover {
+	transform: scale(1.2);
+	animation: animate 8s linear infinite;
 }
+   
+.hint:before {
+	content: "";
+	position: absolute;
+	top: -5px;
+	right: -5px;
+	bottom: -5px;
+	left: -5px;
+	z-index: -1;
+	background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+	background-size: 400%;
+	border-radius: 40px;
+	opacity: 0;
+	transition: .5s;
+}
+   
+.hint:hover:before {
+	filter: blur(20px);
+	opacity: 1;
+	animation: animate 8s linear infinite;
+}
+
+@keyframes animate {
+	0% {
+		background-position: 0%;
+	}
+	100% {
+		background-position: 400%;
+	}
+}
+
 .hint.active{
-	display: block;
+	transform: scale(1);
 }
 .hint-length{
 	display: none;
@@ -144,7 +187,7 @@ input {
 }
 
 .descr{
-	display: none;
+	transform: translateX(1500px);
 	position: absolute;
 	top: 25px;
 	margin: 0 auto;
@@ -160,9 +203,11 @@ input {
 	transition: .3s;
 	white-space: nowrap;
 	padding: 5px 15px;
+	transition: .5s;
 }
 .descr.active{
-	display: flex;
+	transform: translateX(0);
+	transition: .5s;
 }
 
 img {
