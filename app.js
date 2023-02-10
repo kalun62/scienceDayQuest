@@ -2,6 +2,7 @@
 
 const app = document.querySelector('.app'),
 	wrap = document.createElement('div'),
+	background = document.createElement('div'),
 	step = document.createElement('span'),
 	button = document.createElement('button'),
 	errorLabel = document.createElement('label')
@@ -11,25 +12,28 @@ let p = 3
 let quests
 
 wrap.classList.add('app__wrapper')
+background.classList.add('background')
 step.classList.add('step')
 button.innerText = 'Далее'
 
-app.append(step, wrap)
+app.append(background, step, wrap)
 
 function firstScreen() {
 	wrap.innerHTML = `
-		<div class="fl">
 			<div class="quest txt">
 				Внимательно прочитайте вопрос, <br>
 				введите ответ в текстовое поле. <br>
 				У вас есть 3 подсказки на каждый вопрос, <br>
 				необходимо правильно записать ответ, проверьте опечатки
 			</div>
-		</div>
-	`;
-	button.innerText = 'начать'
-	document.querySelector('.fl').append(button)
+			`;
+	app.append(button)
+	button.innerHTML = `<img class="loaderBtn" src="image/loaderButton.gif" alt="loader"><span>загрузка...</span>`
+	button.setAttribute('disabled', 'disabled')
+
 	fetchQuests()
+	paralax()
+
 	button.addEventListener('click', questAppend)
 }
 
@@ -40,6 +44,9 @@ function fetchQuests() {
 		})
 		.then((response) => {
 			quests = response.questions
+			button.removeAttribute('disabled')
+
+			button.innerText = 'начать'
 		})
 }
 
@@ -49,14 +56,13 @@ const questAppend = () => {
 	}
 	button.removeEventListener('click', questAppend)
 	button.addEventListener('click', validate)
-	i <= quests.length ? questTextOrImage() : finale()
+	i <= quests.length ? questTextOrImage() : final()
 }
 
 function questTextOrImage() {
 	if (quests[i - 1].quest.includes('http')) {
 		p = 3
 		wrap.innerHTML = `
-			<div class="fl">
 				<div class="quest txt">
 					<div class="hint" title="Подсказка"><img src="image/hint.png" alt="hint"></div>
 					<div class="hint-length">${p}</div>
@@ -65,7 +71,6 @@ function questTextOrImage() {
 					<div class="descr" id="descr">${quests[i-1].description}</div>
 					<input name="ansver" type="text" autocomplete="off" placeholder="Ваш ответ"></input>
 				</div>
-			</div>
 			`
 		step.innerText = `Вопрос ${i} из ${quests.length}`
 		button.innerText = 'Далее'
@@ -73,7 +78,6 @@ function questTextOrImage() {
 	} else {
 		p = 3
 		wrap.innerHTML = `
-			<div class="fl">
 				<div class="quest txt">
 					<div class="hint" title="Подсказка"><img src="image/hint.png" alt="hint"></div>
 					<div class="hint-length">${p}</div>
@@ -81,11 +85,10 @@ function questTextOrImage() {
 					<div class="descr">${quests[i-1].description}</div>
 					<input name="ansver" type="text" autocomplete="off" placeholder="Ваш ответ"></input>				
 				</div>
-			</div>
 			`;
 			step.innerText = `Вопрос ${i} из ${quests.length}`,
 			button.innerText = 'Далее'
-			document.querySelector('.fl').append(button)
+			app.append(button)
 	}
 	clickEnter()
 	activeHint()
@@ -115,9 +118,16 @@ function validate() {
 		(input.classList.remove('error'), i++, questAppend())
 }
 
-function finale() {
-	app.innerHTML = `<div class="final">Верно !!!<br> Ваше слово КОЛЫБЕЛИ</div>`
+function final() {
+	app.innerHTML = `<div class="background"></div><div class="final">Все верно !!!<br><br> Получите Ваше слово !!!</div>`
 	button.removeEventListener('click', validate)
+	audio()
+}
+
+function audio() {
+	const audio = new Audio
+	audio.src = 'audio/alarm.mp3'
+	audio.autoplay = true
 }
 
 function clickEnter() {
@@ -169,5 +179,15 @@ function descrHintImg () {
 			case 1: return descr.textContent = 'Может все-таки посмотреть слева?'	
 		}
 	}
+}
+
+function paralax() {
+	let bg = document.querySelector('.background');
+	
+	window.addEventListener('mousemove', function(e) {
+		let x = e.clientX / window.innerWidth;
+		let y = e.clientY / window.innerHeight;  
+		bg.style.transform = 'translate(-' + x * 20 + 'px, -' + y * 20 + 'px)';
+	});
 }
 firstScreen()

@@ -16,23 +16,30 @@ body {
 	width: 100%;
 	height: 100vh;
 	text-align: center;
-	background-image: url('image/background.jpg');
-	background-size: cover;
-	background-color: #818080;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	overflow: hidden;
+}
+.background{
+	position: absolute;
+	
+	width: 110%;
+	height: 110%;
+	background-image: url('image/background.jpg');
+	background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: all 0.1s ease;  
+	background-color: #818080;
 }
 
 .app__wrapper {
 	display: flex;
 	flex-direction: column;
     align-items: center;
-	width: 100%;
-}
-.fl{
 	width: 100%;
 }
 
@@ -152,7 +159,7 @@ input {
 	justify-content: center;
 	transition: .3s;
 	white-space: nowrap;
-	padding: 5px 5px;
+	padding: 5px 15px;
 }
 .descr.active{
 	display: flex;
@@ -163,7 +170,9 @@ img {
 }
 
 button {
-	padding: 7px 40px;
+	position: relative;
+	width: 180px;
+	height: 50px;
 	background-color: #ccc9;
 	color: white;
 	border-radius: 7px;
@@ -174,10 +183,28 @@ button {
 	transition: .3s;
 	cursor: pointer;
 	outline: none;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;	
+}
+button span{
+	margin-left: 10px;
+	clip-path: inset(0 1ch 0 0);
+	animation: l 1.5s steps(4) infinite;
+}
+
+@keyframes l {
+	to {
+	clip-path: inset(0 -1ch 0 0)
+	}
 }
 
 button:hover {
 	background-color: rgba(0, 0, 0, 0.473);
+}
+.loaderBtn{
+	width: 30px;
 }
 .final{
 	width: 100%;
@@ -190,6 +217,8 @@ button:hover {
     font-weight: 600;
     font-size: 40px;
 	text-shadow: 1px 3px 2px #000;
+
+	z-index: 999;
 }
 
 @media (max-width: 768px) {
