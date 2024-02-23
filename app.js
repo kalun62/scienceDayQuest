@@ -38,7 +38,7 @@ function firstScreen() {
 }
 
 function fetchQuests() {
-	fetch('https://script.google.com/macros/s/AKfycbwZhmLmaU5PojWJKZPmqbSJZ4FNiiaT8d70-7rCGHtzFwaidZH9_uW3b6H7E9_sS4vY/exec')
+	fetch('https://script.google.com/macros/s/AKfycbwVcEEAYuHauNXQF7z7WJIh-jcF9pgq_MKYThm7rYOJtQenxjsXNlwsI7gHtff3i6WJ/exec')
 		.then((response) => {
 			return response.json();
 		})
